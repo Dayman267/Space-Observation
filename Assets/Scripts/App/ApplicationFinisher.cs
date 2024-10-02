@@ -1,4 +1,5 @@
 using UnityEditor;
+using UnityEngine;
 
 namespace App
 {
@@ -9,7 +10,7 @@ namespace App
 #if UNITY_EDITOR
             EditorApplication.isPlaying = false;
 #else
-            Application.Quit();
+            Application.Quit(0);
 #endif
         }
     }

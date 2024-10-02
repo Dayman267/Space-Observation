@@ -1,4 +1,3 @@
-// using App;
 using Systems;
 using UnityEngine;
 using Zenject;
@@ -13,8 +12,6 @@ namespace Installers
     {
         public override void InstallBindings()
         {
-            // Container.Bind<ApplicationFinisher>().AsSingle();
-            
             Container
                 .BindInterfacesTo<ExitController>()
                 .AsCached();
