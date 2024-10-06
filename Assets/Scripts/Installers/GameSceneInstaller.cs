@@ -16,6 +16,10 @@ namespace Installers
         [SerializeField] private Camera camera3;
         [SerializeField] private Camera camera4;
         [SerializeField] private Camera camera5;
+
+        [Header("Rooms")]
+        [SerializeField] private Anomaly[] room1Anomalies;
+        [SerializeField] private Anomaly[] room2Anomalies;
         
         [Header("Buttons")]
         [SerializeField] private Button leftButton;
@@ -26,28 +30,41 @@ namespace Installers
         [SerializeField] private float secsInMin;
         [SerializeField] private int minsCounter;
 
-        [Header("Anomalies")]
-        [SerializeField] private Anomaly cube;
+        [Header("Anomalies")] 
+        [SerializeField] private float anomalyCastChancePerSec;
         
         public override void InstallBindings()
+        {
+            InstallCameras();
+
+            Container.BindInterfacesTo<LeftSwitchButton>().AsSingle().WithArguments(leftButton).NonLazy();
+            Container.BindInterfacesTo<RightSwitchButton>().AsSingle().WithArguments(rightButton).NonLazy();
+
+            Container.BindInterfacesTo<CameraSwitchController>().AsSingle();
+
+            InstallRooms();
+            
+            Container.BindInterfacesTo<AnomaliesController>().AsSingle().WithArguments(anomalyCastChancePerSec).NonLazy();
+
+            Container.Bind<TextMeshProUGUI>().FromInstance(timerTMP).AsSingle();
+            Container.BindInterfacesTo<Timer>().AsSingle().WithArguments(secsInMin, minsCounter);
+
+            Container.BindInterfacesTo<InputManager>().AsSingle();
+        }
+
+        private void InstallCameras()
         {
             Container.Bind<Camera>().FromInstance(camera1).AsCached();
             Container.Bind<Camera>().FromInstance(camera2).AsCached();
             Container.Bind<Camera>().FromInstance(camera3).AsCached();
             Container.Bind<Camera>().FromInstance(camera4).AsCached();
             Container.Bind<Camera>().FromInstance(camera5).AsCached();
+        }
 
-            Container.BindInterfacesTo<LeftSwitchButton>().AsSingle().WithArguments(leftButton).NonLazy();
-            Container.BindInterfacesTo<RightSwitchButton>().AsSingle().WithArguments(rightButton).NonLazy();
-
-            Container.BindInterfacesTo<CameraSwitchController>().AsSingle();
-            
-            Container.BindInterfacesTo<AnomaliesController>().AsSingle().NonLazy();
-            Container.Bind<IAnomaly>().FromInstance(cube).AsCached();
-
-            Container.Bind<TextMeshProUGUI>().FromInstance(timerTMP).AsSingle();
-
-            Container.BindInterfacesTo<Timer>().AsSingle().WithArguments(secsInMin, minsCounter);
+        private void InstallRooms()
+        {
+            Container.Bind<Room>().AsCached().WithArguments(camera1, room1Anomalies);
+            Container.Bind<Room>().AsCached().WithArguments(camera2, room2Anomalies);
         }
     }
 }

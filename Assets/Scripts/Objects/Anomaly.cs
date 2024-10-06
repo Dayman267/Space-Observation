@@ -1,4 +1,3 @@
-using Systems;
 using UnityEngine;
 
 namespace Objects
@@ -6,12 +5,11 @@ namespace Objects
     public class Anomaly : MonoBehaviour, IAnomaly
     {
         [SerializeField] private AnomalyType anomalyType;
-        //private AnomaliesController anomaliesController;
+        private bool isCasted;
 
-        public Anomaly(AnomalyType anomalyType)//, AnomaliesController anomaliesController)
+        public Anomaly(AnomalyType anomalyType)
         {
             this.anomalyType = anomalyType;
-            //this.anomaliesController = anomaliesController;
         }
 
         public void CastAnomaly()
@@ -28,44 +26,60 @@ namespace Objects
                 case AnomalyType.Meteorite:        HandleMeteorite(); break;
             }
         }
-        
+
+        public bool IsCasted() => isCasted;
+
+        public void FixAnomaly()
+        {
+            isCasted = false;
+            gameObject.SetActive(true);
+        }
+
         private void HandleDisappear()
         {
+            isCasted = true;
             gameObject.SetActive(false);
         }
 
         private void HandleAppear()
         {
+            isCasted = true;
             gameObject.SetActive(true);
         }
 
         private void HandleMove()
         {
+            isCasted = true;
             transform.position += Vector3.right * 2f;
         }
 
         private void HandleCameraDistortion()
         {
+            isCasted = true;
             transform.position += Vector3.right * 2f;
         }
 
         private void HandleIntruder()
         {
+            isCasted = true;
             transform.position += Vector3.right * 2f;
         }
 
         private void HandleAbyss()
         {
+            isCasted = true;
             transform.position += Vector3.right * 2f;
         }
 
         private void HandleDoorOpenClose()
         {
+            isCasted = true;
             transform.position += Vector3.right * 2f;
         }
 
         private void HandleMeteorite()
         {
+            isCasted = true;
             transform.position += Vector3.right * 2f;
         }
     }
