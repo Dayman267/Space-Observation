@@ -44,12 +44,12 @@ namespace Installers
 
             InstallRooms();
             
+            Container.BindInterfacesAndSelfTo<AnomalyChecker>().AsSingle();
             Container.BindInterfacesTo<AnomaliesController>().AsSingle().WithArguments(anomalyCastChancePerSec).NonLazy();
 
             Container.Bind<TextMeshProUGUI>().FromInstance(timerTMP).AsSingle();
             Container.BindInterfacesTo<Timer>().AsSingle().WithArguments(secsInMin, minsCounter);
 
-            Container.BindInterfacesTo<InputManager>().AsSingle();
         }
 
         private void InstallCameras()

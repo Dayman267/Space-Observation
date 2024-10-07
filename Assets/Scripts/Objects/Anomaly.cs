@@ -25,6 +25,8 @@ namespace Objects
                 case AnomalyType.DoorOpenClose:    HandleDoorOpenClose(); break;
                 case AnomalyType.Meteorite:        HandleMeteorite(); break;
             }
+            
+            Debug.Log("casted");
         }
 
         public bool IsCasted() => isCasted;
@@ -32,13 +34,18 @@ namespace Objects
         public void FixAnomaly()
         {
             isCasted = false;
-            gameObject.SetActive(true);
+            Renderer[] components = gameObject.GetComponentsInChildren<Renderer>();
+            foreach (var component in components)
+                component.enabled = true;
+            Debug.Log("Fixed");
         }
 
         private void HandleDisappear()
         {
             isCasted = true;
-            gameObject.SetActive(false);
+            Renderer[] components = gameObject.GetComponentsInChildren<Renderer>();
+            foreach (var component in components)
+                component.enabled = false;
         }
 
         private void HandleAppear()

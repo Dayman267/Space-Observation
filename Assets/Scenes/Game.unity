@@ -135,6 +135,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Floor Tile 01
       objectReference: {fileID: 0}
+    - target: {fileID: 6257800485735965347, guid: cf8443763fc34314490f8a3e2f94dd37, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6954531691785998512, guid: cf8443763fc34314490f8a3e2f94dd37, type: 3}
       propertyPath: m_LocalPosition.x
       value: -11.513184
@@ -237,6 +241,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Floor Tile 04 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2578913877748167514, guid: f9e1a0158e9f7a545a16fa7c2aa7be4e, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -298,6 +306,10 @@ PrefabInstance:
     - target: {fileID: 3167031632194995179, guid: 4f019145598ea474b899ca25a03acd09, type: 3}
       propertyPath: m_Name
       value: Floor Tile 03
+      objectReference: {fileID: 0}
+    - target: {fileID: 3167031632194995179, guid: 4f019145598ea474b899ca25a03acd09, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -509,7 +521,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1433550336}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &643163732
@@ -845,6 +858,10 @@ PrefabInstance:
     - target: {fileID: 2796068601526596500, guid: aae952dc76387e84287a598d901b120d, type: 3}
       propertyPath: m_Name
       value: Floor Tile 02
+      objectReference: {fileID: 0}
+    - target: {fileID: 2796068601526596500, guid: aae952dc76387e84287a598d901b120d, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1238,7 +1255,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1010143807}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1259,7 +1276,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 222723518}
-  - {fileID: 1433550336}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1026205597
@@ -1565,9 +1581,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1933807477239654733, guid: d324de115c4dff845bee7b7f166883c4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2647211758135124163, guid: d324de115c4dff845bee7b7f166883c4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2702167651921923441, guid: d324de115c4dff845bee7b7f166883c4, type: 3}
       propertyPath: m_Name
       value: Wall BayDoor
+      objectReference: {fileID: 0}
+    - target: {fileID: 2702167651921923441, guid: d324de115c4dff845bee7b7f166883c4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4975399993979019661, guid: d324de115c4dff845bee7b7f166883c4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1908,6 +1940,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Floor Tile 03 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3167031632194995179, guid: 4f019145598ea474b899ca25a03acd09, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2050,7 +2086,7 @@ GameObject:
   - component: {fileID: 1433550336}
   - component: {fileID: 1433550335}
   - component: {fileID: 1433550334}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: EventSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2105,7 +2141,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1010143807}
+  m_Father: {fileID: 643163731}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1434718003 stripped
 MonoBehaviour:
@@ -2365,6 +2401,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Floor Tile 01 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6257800485735965347, guid: cf8443763fc34314490f8a3e2f94dd37, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6954531691785998512, guid: cf8443763fc34314490f8a3e2f94dd37, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.48443604
@@ -2467,6 +2507,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Floor Tile 04
       objectReference: {fileID: 0}
+    - target: {fileID: 2578913877748167514, guid: f9e1a0158e9f7a545a16fa7c2aa7be4e, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2528,6 +2572,10 @@ PrefabInstance:
     - target: {fileID: 2796068601526596500, guid: aae952dc76387e84287a598d901b120d, type: 3}
       propertyPath: m_Name
       value: Floor Tile 02 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2796068601526596500, guid: aae952dc76387e84287a598d901b120d, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2624,6 +2672,10 @@ PrefabInstance:
     - target: {fileID: 2796068601526596500, guid: aae952dc76387e84287a598d901b120d, type: 3}
       propertyPath: m_Name
       value: Floor Tile 02 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2796068601526596500, guid: aae952dc76387e84287a598d901b120d, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
