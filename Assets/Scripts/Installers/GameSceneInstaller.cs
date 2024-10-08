@@ -3,6 +3,7 @@ using Objects;
 using Systems;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Zenject;
 
@@ -32,6 +33,7 @@ namespace Installers
 
         [Header("Anomalies")] 
         [SerializeField] private float anomalyCastChancePerSec;
+        [SerializeField] private float anomalyCheckDuration;
         
         public override void InstallBindings()
         {
@@ -44,7 +46,7 @@ namespace Installers
 
             InstallRooms();
             
-            Container.BindInterfacesAndSelfTo<AnomalyChecker>().AsSingle();
+            Container.BindInterfacesAndSelfTo<AnomalyChecker>().AsSingle().WithArguments(anomalyCheckDuration);
             Container.BindInterfacesTo<AnomaliesController>().AsSingle().WithArguments(anomalyCastChancePerSec).NonLazy();
 
             Container.Bind<TextMeshProUGUI>().FromInstance(timerTMP).AsSingle();

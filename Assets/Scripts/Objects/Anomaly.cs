@@ -7,9 +7,14 @@ namespace Objects
         [SerializeField] private AnomalyType anomalyType;
         private bool isCasted;
 
+        private Vector3 normalPosition;
+        private Vector3 normalSize;
+
         public Anomaly(AnomalyType anomalyType)
         {
             this.anomalyType = anomalyType;
+            normalPosition = transform.position;
+            normalSize = transform.localScale;
         }
 
         public void CastAnomaly()
@@ -33,10 +38,41 @@ namespace Objects
 
         public void FixAnomaly()
         {
+            switch (anomalyType)
+            {
+                case AnomalyType.Disappear:
+                    HandleAppear();
+                    break;
+                
+                case AnomalyType.Appear:
+                    HandleDisappear();
+                    break;
+                
+                case AnomalyType.Move:
+                    transform.position = normalPosition;
+                    break;
+                
+                case AnomalyType.CameraDistortion: 
+                    HandleDisappear();
+                    break;
+                
+                case AnomalyType.Intruder: 
+                    HandleDisappear();
+                    break;
+                
+                case AnomalyType.Abyss: 
+                    HandleDisappear();
+                    transform.localScale = normalSize;
+                    break;
+                
+                case AnomalyType.DoorOpenClose: break;
+                case AnomalyType.Meteorite:
+                    HandleDisappear();
+                    transform.position = normalPosition;
+                    break;
+            }
+
             isCasted = false;
-            Renderer[] components = gameObject.GetComponentsInChildren<Renderer>();
-            foreach (var component in components)
-                component.enabled = true;
             Debug.Log("Fixed");
         }
 
@@ -51,7 +87,9 @@ namespace Objects
         private void HandleAppear()
         {
             isCasted = true;
-            gameObject.SetActive(true);
+            Renderer[] components = gameObject.GetComponentsInChildren<Renderer>();
+            foreach (var component in components)
+                component.enabled = true;
         }
 
         private void HandleMove()
@@ -63,31 +101,26 @@ namespace Objects
         private void HandleCameraDistortion()
         {
             isCasted = true;
-            transform.position += Vector3.right * 2f;
         }
 
         private void HandleIntruder()
         {
             isCasted = true;
-            transform.position += Vector3.right * 2f;
         }
 
         private void HandleAbyss()
         {
             isCasted = true;
-            transform.position += Vector3.right * 2f;
         }
 
         private void HandleDoorOpenClose()
         {
             isCasted = true;
-            transform.position += Vector3.right * 2f;
         }
 
         private void HandleMeteorite()
         {
             isCasted = true;
-            transform.position += Vector3.right * 2f;
         }
     }
 }
