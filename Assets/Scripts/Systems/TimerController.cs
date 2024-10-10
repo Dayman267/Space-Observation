@@ -1,14 +1,12 @@
 using System;
-using TMPro;
 using UniRx;
 using UnityEngine;
 using IInitializable = Zenject.IInitializable;
 
 namespace App
 {
-    public class Timer : IInitializable
+    public class TimerController : IInitializable
     {
-        private TextMeshProUGUI textMP;
         private readonly float secsInMin;
         private readonly int minsCounter;
         private readonly int finalHour;
@@ -17,13 +15,13 @@ namespace App
         private uint hours = 12;
         private uint minutes;
 
+        public static Action<string> OnTimerUpdated;
         public static Action OnShiftEnded;
 
         private CompositeDisposable disposable;
 
-        public Timer(TextMeshProUGUI textMP, float secsInMin, int minsCounter, int finalHour)
+        public TimerController(float secsInMin, int minsCounter, int finalHour)
         {
-            this.textMP = textMP;
             this.secsInMin = secsInMin;
             this.minsCounter = minsCounter;
             this.finalHour = finalHour;
@@ -33,7 +31,7 @@ namespace App
 
         public void Initialize()
         {
-            textMP.text = "12:00 AM";
+            OnTimerUpdated?.Invoke("12:00 AM");
             StartTimer();
         }
 
@@ -45,7 +43,8 @@ namespace App
                 {
                     if (minsPassed == minsCounter)
                     {
-                        textMP.text = minutes < 10 ? $"{hours}:0{minutes} AM" : $"{hours}:{minutes} AM";
+                        OnTimerUpdated?.Invoke(minutes < 10 ? $"{hours}:0{minutes} AM" : $"{hours}:{minutes} AM");
+                        //textMP.text = minutes < 10 ? $"{hours}:0{minutes} AM" : $"{hours}:{minutes} AM";
                         minsPassed = 0;
                     }
                 

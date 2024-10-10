@@ -3,7 +3,6 @@ using Objects;
 using Systems;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Zenject;
 
@@ -69,8 +68,8 @@ namespace Installers
             Container.BindInterfacesTo<AnomaliesController>().AsSingle()
                 .WithArguments(anomalyCastChancePerSec, anomalyLimit).NonLazy();
 
-            Container.Bind<TextMeshProUGUI>().FromInstance(timerTMP).AsSingle();
-            Container.BindInterfacesTo<Timer>().AsSingle().WithArguments(secsInMin, minsCounter, finalHour);
+            Container.BindInterfacesTo<TimerController>().AsSingle().WithArguments(secsInMin, minsCounter, finalHour);
+            Container.Bind<TimerView>().FromComponentInHierarchy().AsSingle();
 
             Container.BindInterfacesTo<AnomaliesInscriptions>().AsSingle()
                 .WithArguments(anomalyFixedGO, noAnomaliesFoundGO, tooManyAnomaliesGO, textShowingDuration);

@@ -33,9 +33,9 @@ namespace Objects
 
         public void Initialize()
         {
-            HideAnomalyFixedGO();
-            HideNoAnomaliesFoundGO();
-            HideTooManyAnomaliesGO();
+            anomalyFixedGO.SetActive(false);
+            noAnomaliesFoundGO.SetActive(false);
+            tooManyAnomaliesGO.SetActive(false);
 
             Anomaly.OnAnomalyFixed += AnomalyFixed;
             AnomalyChecker.OnAnomalyNotSpotted += NoAnomaliesFound;
@@ -49,57 +49,25 @@ namespace Objects
             AnomaliesController.OnLimitExceeded -= TooManyAnomalies;
         }
 
-        private void AnomalyFixed()
+        private void AnomalyFixed() => AnomalyInscriptionUpdate(anomalyFixedGO);
+
+        private void NoAnomaliesFound() => AnomalyInscriptionUpdate(noAnomaliesFoundGO);
+
+        private void TooManyAnomalies() => AnomalyInscriptionUpdate(tooManyAnomaliesGO);
+
+        private void AnomalyInscriptionUpdate(GameObject inscription)
         {
-            ShowAnomalyFixedGO();
+            inscription.SetActive(true);
             showTimeLeft = showingDuration;
             Observable.EveryUpdate().Subscribe(_ =>
             {
                 if (showTimeLeft <= 0)
                 {
-                    HideAnomalyFixedGO();
+                    inscription.SetActive(false);
                     disposable.Clear();
                 }
                 showTimeLeft -= Time.deltaTime;
             }).AddTo(disposable);
         }
-
-        private void NoAnomaliesFound()
-        {
-            ShowNoAnomaliesFoundGO();
-            showTimeLeft = showingDuration;
-            Observable.EveryUpdate().Subscribe(_ =>
-            {
-                if (showTimeLeft <= 0)
-                {
-                    HideNoAnomaliesFoundGO();
-                    disposable.Clear();
-                }
-                showTimeLeft -= Time.deltaTime;
-            }).AddTo(disposable);
-        }
-
-        private void TooManyAnomalies()
-        {
-            ShowTooManyAnomaliesGO();
-            showTimeLeft = showingDuration;
-            Observable.EveryUpdate().Subscribe(_ =>
-            {
-                if (showTimeLeft <= 0)
-                {
-                    HideTooManyAnomaliesGO();
-                    disposable.Clear();
-                }
-                showTimeLeft -= Time.deltaTime;
-            }).AddTo(disposable);
-        }
-
-        private void ShowAnomalyFixedGO() => anomalyFixedGO.SetActive(true);
-        private void ShowNoAnomaliesFoundGO() => noAnomaliesFoundGO.SetActive(true);
-        private void ShowTooManyAnomaliesGO() => tooManyAnomaliesGO.SetActive(true);
-        
-        private void HideAnomalyFixedGO() => anomalyFixedGO.SetActive(false);
-        private void HideNoAnomaliesFoundGO() => noAnomaliesFoundGO.SetActive(false);
-        private void HideTooManyAnomaliesGO() => tooManyAnomaliesGO.SetActive(false);
     }
 }

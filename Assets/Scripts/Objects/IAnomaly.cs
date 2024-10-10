@@ -1,5 +1,3 @@
-using System;
-
 namespace Objects
 {
     public interface IAnomaly

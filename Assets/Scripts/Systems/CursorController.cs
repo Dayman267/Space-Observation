@@ -16,16 +16,12 @@ namespace App
             this.customCursor = customCursor;
             cursorMode = CursorMode.Auto;
 
-            switch (hotspotPosition)
+            hotSpot = hotspotPosition switch
             {
-                case CursorHotspotPosition.TopLeft:
-                    hotSpot = Vector2.zero;
-                    break;
-
-                case CursorHotspotPosition.Center:
-                    hotSpot = new Vector2(customCursor.width / 2, customCursor.height / 2);
-                    break;
-            }
+                CursorHotspotPosition.TopLeft => Vector2.zero,
+                CursorHotspotPosition.Center => new Vector2(customCursor.width / 2f, customCursor.height / 2f),
+                _ => hotSpot
+            };
         }
         
         public void Initialize()

@@ -24,12 +24,12 @@ namespace App
 
         public void Initialize()
         {
-            Timer.OnShiftEnded += WaitAndGoToTheMainMenu;
+            TimerController.OnShiftEnded += WaitAndGoToTheMainMenu;
         }
 
         public void Dispose()
         {
-            Timer.OnShiftEnded -= WaitAndGoToTheMainMenu;
+            TimerController.OnShiftEnded -= WaitAndGoToTheMainMenu;
         }
 
         private void WaitAndGoToTheMainMenu()
