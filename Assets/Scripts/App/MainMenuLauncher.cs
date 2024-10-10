@@ -2,7 +2,7 @@ using UnityEngine.SceneManagement;
 
 namespace App
 {
-    public class MainMenuLauncher
+    public sealed class MainMenuLauncher
     {
         public void GoToMainMenu()
         {

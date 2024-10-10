@@ -32,6 +32,10 @@ namespace App
             Container
                 .Bind<MainMenuLauncher>()
                 .AsSingle();
+
+            Container
+                .Bind<CorrectSceneLauncher>()
+                .AsSingle();
         }
     }
 }

@@ -8,6 +8,7 @@ namespace Installers
     public sealed class MenuSceneInstaller : MonoInstaller
     {
         [SerializeField] private Button startButton;
+        [SerializeField] private Button correctSceneButton;
         [SerializeField] private Button exitButton;
 
         public override void InstallBindings()
@@ -16,6 +17,11 @@ namespace Installers
                 .BindInterfacesTo<StartGameButton>()
                 .AsSingle()
                 .WithArguments(startButton)
+                .NonLazy();
+
+            Container.BindInterfacesTo<CorrectSceneButton>()
+                .AsSingle()
+                .WithArguments(correctSceneButton)
                 .NonLazy();
             
             Container
