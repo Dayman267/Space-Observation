@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Objects
@@ -7,13 +8,15 @@ namespace Objects
         [SerializeField] private AnomalyType anomalyType;
         private bool isCasted;
 
-        private Vector3 normalPosition;
+        //private Vector3 normalPosition;
         private Vector3 normalSize;
+
+        public static Action OnAnomalyFixed;
 
         public Anomaly(AnomalyType anomalyType)
         {
             this.anomalyType = anomalyType;
-            normalPosition = transform.position;
+            //normalPosition = transform.position;
             normalSize = transform.localScale;
         }
 
@@ -49,7 +52,7 @@ namespace Objects
                     break;
                 
                 case AnomalyType.Move:
-                    transform.position = normalPosition;
+                    transform.position -= Vector3.left * 2f;
                     break;
                 
                 case AnomalyType.CameraDistortion: 
@@ -68,11 +71,12 @@ namespace Objects
                 case AnomalyType.DoorOpenClose: break;
                 case AnomalyType.Meteorite:
                     HandleDisappear();
-                    transform.position = normalPosition;
+                    //transform.position = normalPosition;
                     break;
             }
 
             isCasted = false;
+            OnAnomalyFixed?.Invoke();
             Debug.Log("Fixed");
         }
 
@@ -95,7 +99,7 @@ namespace Objects
         private void HandleMove()
         {
             isCasted = true;
-            transform.position += Vector3.right * 2f;
+            transform.position += Vector3.left * 2f;
         }
 
         private void HandleCameraDistortion()
@@ -105,6 +109,7 @@ namespace Objects
 
         private void HandleIntruder()
         {
+            HandleAppear();
             isCasted = true;
         }
 

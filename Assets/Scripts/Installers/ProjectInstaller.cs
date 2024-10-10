@@ -12,10 +12,7 @@ namespace App
     {
         [Header("Cursor")]
         [SerializeField] private Texture2D cursor;
-        [SerializeField] private Texture2D loadingCursor;
         [SerializeField] private CursorHotspotPosition cursorHotspotPosition;
-        //[SerializeField] private RectTransform parent;
-        //[SerializeField] private float cursorRotationSpeed;
         
         public override void InstallBindings()
         {
@@ -30,7 +27,11 @@ namespace App
             Container
                 .BindInterfacesTo<CursorController>()
                 .AsSingle()
-                .WithArguments(cursor, loadingCursor, cursorHotspotPosition);
+                .WithArguments(cursor, cursorHotspotPosition);
+
+            Container
+                .Bind<MainMenuLauncher>()
+                .AsSingle();
         }
     }
 }

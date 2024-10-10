@@ -11,6 +11,10 @@ namespace Installers
 {
     public sealed class GameSceneInstaller : MonoInstaller
     {
+        [Header("LoadingCursor")] 
+        [SerializeField] private GameObject loadingCursor;
+        [SerializeField] private float rotationSpeed;
+        
         [Header("Cameras")]
         [SerializeField] private Camera camera1;
         [SerializeField] private Camera camera2;
@@ -21,6 +25,9 @@ namespace Installers
         [Header("Rooms")]
         [SerializeField] private Anomaly[] room1Anomalies;
         [SerializeField] private Anomaly[] room2Anomalies;
+        [SerializeField] private Anomaly[] room3Anomalies;
+        [SerializeField] private Anomaly[] room4Anomalies;
+        [SerializeField] private Anomaly[] room5Anomalies;
         
         [Header("Buttons")]
         [SerializeField] private Button leftButton;
@@ -30,14 +37,26 @@ namespace Installers
         [SerializeField] private TextMeshProUGUI timerTMP;
         [SerializeField] private float secsInMin;
         [SerializeField] private int minsCounter;
+        [SerializeField] private int finalHour;
 
         [Header("Anomalies")] 
         [SerializeField] private float anomalyCastChancePerSec;
+        [SerializeField] private int anomalyLimit;
         [SerializeField] private float anomalyCheckDuration;
+
+        [Header("Texts")] 
+        [SerializeField] private GameObject anomalyFixedGO;
+        [SerializeField] private GameObject noAnomaliesFoundGO;
+        [SerializeField] private GameObject tooManyAnomaliesGO;
+        [SerializeField] private float textShowingDuration;
+        [SerializeField] private GameObject winScreen;
         
         public override void InstallBindings()
         {
             InstallCameras();
+
+            Container.BindInterfacesTo<LoadingCursorController>().AsSingle()
+                .WithArguments(loadingCursor, rotationSpeed);
 
             Container.BindInterfacesTo<LeftSwitchButton>().AsSingle().WithArguments(leftButton).NonLazy();
             Container.BindInterfacesTo<RightSwitchButton>().AsSingle().WithArguments(rightButton).NonLazy();
@@ -47,10 +66,16 @@ namespace Installers
             InstallRooms();
             
             Container.BindInterfacesAndSelfTo<AnomalyChecker>().AsSingle().WithArguments(anomalyCheckDuration);
-            Container.BindInterfacesTo<AnomaliesController>().AsSingle().WithArguments(anomalyCastChancePerSec).NonLazy();
+            Container.BindInterfacesTo<AnomaliesController>().AsSingle()
+                .WithArguments(anomalyCastChancePerSec, anomalyLimit).NonLazy();
 
             Container.Bind<TextMeshProUGUI>().FromInstance(timerTMP).AsSingle();
-            Container.BindInterfacesTo<Timer>().AsSingle().WithArguments(secsInMin, minsCounter);
+            Container.BindInterfacesTo<Timer>().AsSingle().WithArguments(secsInMin, minsCounter, finalHour);
+
+            Container.BindInterfacesTo<AnomaliesInscriptions>().AsSingle()
+                .WithArguments(anomalyFixedGO, noAnomaliesFoundGO, tooManyAnomaliesGO, textShowingDuration);
+
+            Container.BindInterfacesTo<WinHandler>().AsSingle().WithArguments(winScreen, textShowingDuration);
 
         }
 
@@ -67,6 +92,9 @@ namespace Installers
         {
             Container.Bind<Room>().AsCached().WithArguments(camera1, room1Anomalies);
             Container.Bind<Room>().AsCached().WithArguments(camera2, room2Anomalies);
+            Container.Bind<Room>().AsCached().WithArguments(camera3, room3Anomalies);
+            Container.Bind<Room>().AsCached().WithArguments(camera4, room4Anomalies);
+            Container.Bind<Room>().AsCached().WithArguments(camera5, room5Anomalies);
         }
     }
 }

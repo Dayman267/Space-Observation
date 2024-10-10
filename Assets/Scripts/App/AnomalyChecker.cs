@@ -17,6 +17,7 @@ namespace App
         public static Action OnCheckStarted;
         public static Action OnCheckEnded;
         public static Action<IAnomaly> OnAnomalySpotted;
+        public static Action OnAnomalyNotSpotted;
         
         public AnomalyChecker(Camera[] cameras, float anomalyCheckDuration)
         {
@@ -73,6 +74,7 @@ namespace App
             {
                 OnAnomalySpotted?.Invoke(anomaly);
             }
+            else OnAnomalyNotSpotted?.Invoke();
         }
     }
 }

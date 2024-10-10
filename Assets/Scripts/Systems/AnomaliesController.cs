@@ -16,15 +16,24 @@ namespace Systems
         private float anomalyCastChancePerSec;
         private float secsLeft = 1;
 
-        public AnomaliesController(Room[] rooms, float anomalyCastChancePerSec)
+        private int allAnomaliesCount;
+
+        private readonly int anomalyLimit;
+        private int activeAnomaliesCount;
+        public static Action OnLimitExceeded;
+
+        public AnomaliesController(Room[] rooms, float anomalyCastChancePerSec, int anomalyLimit)
         {
             this.rooms = rooms;
             this.anomalyCastChancePerSec = anomalyCastChancePerSec;
+            this.anomalyLimit = anomalyLimit;
         }
 
         public void Initialize()
         {
             anomalyCastChancePerSec /= 100;
+            allAnomaliesCount = rooms.Sum(room => room.Anomalies.Length);
+            
             AnomalyChecker.OnAnomalySpotted += FixSpottedAnomaly;
         }
 
@@ -37,26 +46,38 @@ namespace Systems
         {
             if (secsLeft <= 0)
             {
-                if (Random.value <= anomalyCastChancePerSec) TriggerAnomaly();
+                if (Random.value <= anomalyCastChancePerSec)
+                {
+                    TriggerAndAddAnomaly();
+                    CheckAnomaliesLimit();
+                }
                 secsLeft = 1;
             }
             else secsLeft -= Time.deltaTime;
+
+            
         }
 
-        private void TriggerAnomaly()
+        private void TriggerAndAddAnomaly()
         {
-            int allAnomaliesCount = rooms.Sum(room => room.Anomalies.Length);
             for (int i = 0; i < allAnomaliesCount; i++)
             {
                 int roomIndex = Random.Range(0, rooms.Length);
                 if (rooms[roomIndex].Camera.gameObject.activeSelf) continue;
                 
                 int anomalyIndex = Random.Range(0, rooms[roomIndex].Anomalies.Length);
-                if (rooms[roomIndex].Anomalies[anomalyIndex].IsCasted()) continue;
+                if (rooms[roomIndex].Anomalies.Length == 0 ||
+                    rooms[roomIndex].Anomalies[anomalyIndex].IsCasted()) continue;
                 
                 rooms[roomIndex].Anomalies[anomalyIndex].CastAnomaly();
+                activeAnomaliesCount++;
                 return;
             }
+        }
+
+        private void CheckAnomaliesLimit()
+        {
+            if (activeAnomaliesCount >= anomalyLimit) OnLimitExceeded?.Invoke();
         }
 
         private void FixSpottedAnomaly(IAnomaly spottedAnomaly)
@@ -65,7 +86,11 @@ namespace Systems
             {
                 foreach (var anomaly in room.Anomalies)
                 {
-                    if (anomaly.Equals(spottedAnomaly)) anomaly.FixAnomaly();
+                    if (anomaly.Equals(spottedAnomaly))
+                    {
+                        anomaly.FixAnomaly();
+                        activeAnomaliesCount--;
+                    }
                 }
             }
         }
