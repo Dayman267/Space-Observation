@@ -4,7 +4,7 @@ using Zenject;
 
 namespace App
 {
-    public class CorrectSceneButton : IInitializable, IDisposable
+    public sealed class CorrectSceneButton : IInitializable, IDisposable
     {
         private readonly Button button;
         private readonly CorrectSceneLauncher correctSceneLauncher;
@@ -15,19 +15,10 @@ namespace App
             this.correctSceneLauncher = correctSceneLauncher;
         }
         
-        void IInitializable.Initialize()
-        {
-            button.onClick.AddListener(OnButtonClicked);
-        }
+        void IInitializable.Initialize() => button.onClick.AddListener(OnButtonClicked);
 
-        void IDisposable.Dispose()
-        {
-            button.onClick.RemoveListener(OnButtonClicked);
-        }
+        void IDisposable.Dispose() => button.onClick.RemoveListener(OnButtonClicked);
 
-        private void OnButtonClicked()
-        {
-            correctSceneLauncher.OpenCorrectScene();
-        }
+        private void OnButtonClicked() => correctSceneLauncher.OpenCorrectScene();
     }
 }

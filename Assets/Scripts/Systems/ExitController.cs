@@ -8,10 +8,8 @@ namespace Systems
     {
         private readonly ApplicationFinisher applicationFinisher;
 
-        public ExitController(ApplicationFinisher applicationFinisher)
-        {
-            this.applicationFinisher = applicationFinisher;
-        }
+        public ExitController(ApplicationFinisher applicationFinisher) 
+            => this.applicationFinisher = applicationFinisher;
 
         void ITickable.Tick()
         {

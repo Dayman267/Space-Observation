@@ -16,19 +16,10 @@ namespace App
             this.cameraSwitchController = cameraSwitchController;
         }
 
-        void IInitializable.Initialize()
-        {
-            button.onClick.AddListener(OnButtonClicked);
-        }
+        void IInitializable.Initialize() => button.onClick.AddListener(OnButtonClicked);
 
-        void IDisposable.Dispose()
-        {
-            button.onClick.RemoveListener(OnButtonClicked);
-        }
+        void IDisposable.Dispose() => button.onClick.RemoveListener(OnButtonClicked);
 
-        private void OnButtonClicked()
-        {
-            cameraSwitchController.SwitchRight();
-        }
+        private void OnButtonClicked() => cameraSwitchController.SwitchRight();
     }
 }

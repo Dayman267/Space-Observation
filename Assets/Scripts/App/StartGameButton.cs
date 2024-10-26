@@ -15,19 +15,10 @@ namespace App
             this.gameLauncher = gameLauncher;
         }
 
-        void IInitializable.Initialize()
-        {
-            button.onClick.AddListener(OnButtonClicked);
-        }
+        void IInitializable.Initialize() => button.onClick.AddListener(OnButtonClicked);
 
-        void IDisposable.Dispose()
-        {
-            button.onClick.RemoveListener(OnButtonClicked);
-        }
+        void IDisposable.Dispose() => button.onClick.RemoveListener(OnButtonClicked);
 
-        private void OnButtonClicked()
-        {
-            gameLauncher.StartGame();
-        }
+        private void OnButtonClicked() => gameLauncher.StartGame();
     }
 }

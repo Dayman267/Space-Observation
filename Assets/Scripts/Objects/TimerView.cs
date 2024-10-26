@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Objects
 {
     [RequireComponent(typeof(TextMeshProUGUI))]
-    public class TimerView : MonoBehaviour
+    public sealed class TimerView : MonoBehaviour
     {
         private TextMeshProUGUI textMP;
 

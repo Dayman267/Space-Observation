@@ -6,7 +6,7 @@ using Zenject;
 
 namespace Systems
 {
-    public class LoadingCursorController : IInitializable, IDisposable
+    public sealed class LoadingCursorController : IInitializable, IDisposable
     {
         private readonly GameObject loadingCursor;
         private readonly RectTransform loadingCursorTransform;

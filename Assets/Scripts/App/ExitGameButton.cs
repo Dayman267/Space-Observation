@@ -15,20 +15,10 @@ namespace App
             this.applicationFinisher = applicationFinisher;
         }
 
+        void IInitializable.Initialize() => button.onClick.AddListener(OnButtonClicked);
 
-        void IInitializable.Initialize()
-        {
-            button.onClick.AddListener(OnButtonClicked);
-        }
+        void IDisposable.Dispose() => button.onClick.RemoveListener(OnButtonClicked);
 
-        void IDisposable.Dispose()
-        {
-            button.onClick.RemoveListener(OnButtonClicked);
-        }
-
-        private void OnButtonClicked()
-        {
-            applicationFinisher.Finish();
-        }
+        private void OnButtonClicked() => applicationFinisher.Finish();
     }
 }

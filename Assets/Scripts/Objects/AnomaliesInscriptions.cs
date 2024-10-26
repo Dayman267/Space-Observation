@@ -7,7 +7,7 @@ using UniRx;
 
 namespace Objects
 {
-    public class AnomaliesInscriptions : IInitializable, IDisposable
+    public sealed class AnomaliesInscriptions : IInitializable, IDisposable
     {
         private readonly GameObject anomalyFixedGO;
         private readonly GameObject noAnomaliesFoundGO;

@@ -26,11 +26,11 @@ namespace Systems
             currentCameraIndex = selectedCameraIndex;
         }
 
-        private bool IsSelectionAtEnd(int indexDirection) 
-            => selectedCameraIndex + indexDirection == cameras.Length;
-
         private bool isSelectionInBounds(int indexDirection)
             => selectedCameraIndex + indexDirection >= 0 
                && selectedCameraIndex + indexDirection <= cameras.Length - 1;
+
+        private bool IsSelectionAtEnd(int indexDirection) 
+            => selectedCameraIndex + indexDirection == cameras.Length;
     }
 }

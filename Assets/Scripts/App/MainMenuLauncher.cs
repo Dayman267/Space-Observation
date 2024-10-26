@@ -4,9 +4,6 @@ namespace App
 {
     public sealed class MainMenuLauncher
     {
-        public void GoToMainMenu()
-        {
-            SceneManager.LoadScene("Menu");
-        }
+        public void GoToMainMenu() => SceneManager.LoadScene("Menu");
     }
 }

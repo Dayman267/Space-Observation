@@ -5,7 +5,7 @@ using IInitializable = Zenject.IInitializable;
 
 namespace App
 {
-    public class TimerController : IInitializable
+    public sealed class TimerController : IInitializable
     {
         private readonly float secsInMin;
         private readonly int minsCounter;
@@ -44,7 +44,6 @@ namespace App
                     if (minsPassed == minsCounter)
                     {
                         OnTimerUpdated?.Invoke(minutes < 10 ? $"{hours}:0{minutes} AM" : $"{hours}:{minutes} AM");
-                        //textMP.text = minutes < 10 ? $"{hours}:0{minutes} AM" : $"{hours}:{minutes} AM";
                         minsPassed = 0;
                     }
                 

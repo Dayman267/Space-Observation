@@ -37,10 +37,7 @@ namespace Systems
             AnomalyChecker.OnAnomalySpotted += FixSpottedAnomaly;
         }
 
-        public void Dispose()
-        {
-            AnomalyChecker.OnAnomalySpotted -= FixSpottedAnomaly;
-        }
+        public void Dispose() => AnomalyChecker.OnAnomalySpotted -= FixSpottedAnomaly;
 
         public void Tick()
         {
@@ -77,7 +74,10 @@ namespace Systems
 
         private void CheckAnomaliesLimit()
         {
-            if (activeAnomaliesCount >= anomalyLimit) OnLimitExceeded?.Invoke();
+            if (activeAnomaliesCount >= anomalyLimit)
+            {
+                OnLimitExceeded?.Invoke();
+            }
         }
 
         private void FixSpottedAnomaly(IAnomaly spottedAnomaly)

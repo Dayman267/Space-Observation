@@ -22,15 +22,9 @@ namespace App
             disposable = new CompositeDisposable();
         }
 
-        public void Initialize()
-        {
-            TimerController.OnShiftEnded += WaitAndGoToTheMainMenu;
-        }
+        public void Initialize() => TimerController.OnShiftEnded += WaitAndGoToTheMainMenu;
 
-        public void Dispose()
-        {
-            TimerController.OnShiftEnded -= WaitAndGoToTheMainMenu;
-        }
+        public void Dispose() => TimerController.OnShiftEnded -= WaitAndGoToTheMainMenu;
 
         private void WaitAndGoToTheMainMenu()
         {
