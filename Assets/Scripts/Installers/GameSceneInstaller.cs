@@ -22,11 +22,11 @@ namespace Installers
         [SerializeField] private Camera camera5;
 
         [Header("Rooms")]
-        [SerializeField] private Anomaly[] room1Anomalies;
-        [SerializeField] private Anomaly[] room2Anomalies;
-        [SerializeField] private Anomaly[] room3Anomalies;
-        [SerializeField] private Anomaly[] room4Anomalies;
-        [SerializeField] private Anomaly[] room5Anomalies;
+        [SerializeField] private AnomalyBase[] room1Anomalies;
+        [SerializeField] private AnomalyBase[] room2Anomalies;
+        [SerializeField] private AnomalyBase[] room3Anomalies;
+        [SerializeField] private AnomalyBase[] room4Anomalies;
+        [SerializeField] private AnomalyBase[] room5Anomalies;
         
         [Header("Buttons")]
         [SerializeField] private Button leftButton;

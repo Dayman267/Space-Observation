@@ -37,14 +37,14 @@ namespace Objects
             noAnomaliesFoundGO.SetActive(false);
             tooManyAnomaliesGO.SetActive(false);
 
-            Anomaly.OnAnomalyFixed += AnomalyFixed;
+            AnomalyBase.OnAnomalyFixed += AnomalyFixed;
             AnomalyChecker.OnAnomalyNotSpotted += NoAnomaliesFound;
             AnomaliesController.OnLimitExceeded += TooManyAnomalies;
         }
 
         public void Dispose()
         {
-            Anomaly.OnAnomalyFixed -= AnomalyFixed;
+            AnomalyBase.OnAnomalyFixed -= AnomalyFixed;
             AnomalyChecker.OnAnomalyNotSpotted -= NoAnomaliesFound;
             AnomaliesController.OnLimitExceeded -= TooManyAnomalies;
         }
